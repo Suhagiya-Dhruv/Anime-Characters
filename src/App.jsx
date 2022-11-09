@@ -1,8 +1,9 @@
-import { InputAdornment, TextField } from '@mui/material';
+import { Button, InputAdornment, TextField } from '@mui/material';
 import TableComponents from './components/tableComponent'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { useEffect, useState } from 'react';
 import axios from 'axios'
+import './app.css'
 
 async function HitAPI(page = 1, limit = 15, search = '') {
   if (search === '') {
@@ -56,15 +57,25 @@ function App() {
     setData(responseData.data)
     setPagination(responseData.pagination)
   }
-  console.log(data, pagination)
 
   return (
-    <div className="App">
-      <div>
-        <h2>Search Anime Characters</h2>
+    <div>
+      <div
+        style={{
+          borderBottom: '2px solid gray',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          margin: "0.5rem 2rem",
+          height:"160px"
+        }}
+      >
+        <h3>Search Anime Characters</h3>
         <TextField
           size="small"
           autoFocus
+          sx={{width:"500px"}}
           onChange={searchValueHandler}
           InputProps={{
             startAdornment: (
@@ -76,10 +87,22 @@ function App() {
         />
         <p>Total <b>{pagination?.items?.total}</b> matching anime characters found</p>
       </div>
-      <TableComponents />
-      <button onClick={backButtonHandler} disabled={pagination?.current_page === 1}>back</button>
-      <button onClick={nextButtonHandler} disabled={!pagination?.has_next_page} >next</button>
-    </div>
+      <div
+        style={{ height: '480px', overflowY: 'auto' }}
+        className="table">
+        <TableComponents data={data} />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginRight:"3rem",
+          marginTop:"1rem"
+        }}>
+        <Button variant='contained' sx={{ marginRight: "1rem" }} size="small" onClick={backButtonHandler} disabled={pagination?.current_page === 1}>back</Button>
+        <Button variant='contained' size="small" onClick={nextButtonHandler} disabled={!pagination?.has_next_page} >next</Button>
+      </div>
+    </div >
   );
 }
 

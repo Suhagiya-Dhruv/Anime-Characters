@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Short+Stack&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: radial-gradient(circle, #6da3aa, #5b8a99, #4d7286, #425b71, #38445b);
+    font-family: 'Short Stack', cursive;
+}
+
+.table::-webkit-scrollbar {
+    display: none;
+}
+
+.table {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
